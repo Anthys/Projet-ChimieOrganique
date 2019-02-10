@@ -13,3 +13,5 @@ Oxydations:
 
 
 [France \| Sigma-Aldrich](https://www.sigmaaldrich.com/france.html)
+
+https://www.chem.wisc.edu/areas/reich/nmr/08-tech-03-dnmr.htm
