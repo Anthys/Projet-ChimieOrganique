@@ -54,7 +54,7 @@ Pour analyser la solution finale, qui devra comporter plus d'un énantiomère qu
 Le choix le plus logique est de faire cette chromatographie en phase liquide, étant donnée la masse molaire élevée de la molécule de pyridine
 ( []g.mol^{-1} [kalkul]) ce qui demanderait un grand apport de chaleur pour maintenir cette molécule en phase gazeuze.
 
-L'analyse se fera en sortie du tube de chromatographie, [].
+L'analyse se fera en sortie du tube de chromatographie, [...].
 - Truc de l'aire + pourcentage 
 - Truc du pouvoir rotatoire, signes changent, valeur absolue identique
 
