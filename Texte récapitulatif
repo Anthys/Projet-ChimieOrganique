@@ -5,6 +5,11 @@ Problématique : comment selectionner un enantiomère lors d'une réaction ?
 
 - Conformation: on a deux enantiomères ; si on fixe un enatiomère on a deux conformations une fois que l'on choisi le cycle en haut ou en bas il faut faire attention au degrès d'inclinaison de la molécule .
 
+- Elements à prendre en compte pour faire une synthèse énantioséléctive:
+  - On doit savoir quel énantiomère on a au départ, lequel on va préférer.
+  - Une fois qu'on étudie un énantiomère en particulier, on doit savoir si sa conformation sera vers le haut ou vers le bas (orientation des deux parties de la molécule, autour de la liasion qui deviendra l'axe de chiralité).
+  - Une fois qu'on a l'orientation de la molécule, on doit prendre en compte l'oscillation des deux groupes, le cycle princial étant en position pseudo equtorial ou pseudo axial.
+
 - On sait que la Péridine ets plus stable que la dihydropéridine, ce qui rend un effet irréversible .
 
 - dans une synthèse énantiosélective, les produits ont la même enthalpie libre. Pour qu'un excès énantiomérique soit observé il faut opérer sous contrôle cinétique avec des états de transitions diastéréo-isomères dont les enthalpies libres sont différentes
