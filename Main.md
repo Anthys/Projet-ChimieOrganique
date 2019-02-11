@@ -1,6 +1,6 @@
 # Projet Conversion de chiralité
 
-[latex], [kalkul], [plutar], [passur], [chéma], [...]
+[latex], [kalkul], [plutar], [chéma], [...]
 
 Le but de notre projet est d'étudier la conversion de chiralité: ici d'observer les mécanismes réactionnels qui permettent de passer d'une molécule chirale à centre stéréogène à une molécule à chiralité axiale. L'objet de notre étude est la transformation d'une molécule de dihydropyridine en une molécule de pyridine.
 
