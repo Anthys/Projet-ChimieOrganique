@@ -1,4 +1,6 @@
 \documentclass{article}
+% * <julbarres@gmail.com> 10:35:15 16 Apr 2019 UTC+0200:
+% Les accents et les apostrophes n'apparaissent pas, mais c'est quand même plus facile pour travailler que le gdoc. Quand on aura finis, je transférerais vers overleaf, où les accents apparaissent
 \usepackage[utf8]{inputenc}
 \usepackage[portrait, margin=1.45in]{geometry}
 \usepackage{graphicx}
@@ -6,6 +8,15 @@
 \graphicspath{ {./images/} }
 \usepackage{gensymb}
 
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
 
 
 \newenvironment{myindentpar}[1]%
@@ -46,7 +57,7 @@
 \endgroup
 \vfil
 \begin{center}
-\includegraphics[scale = 0.3]{images/logo.png}
+\includegraphics[scale = 0.3]{logo}
 \end{center}
 }
 \makeatother
@@ -249,7 +260,7 @@ Les solutions finales ont ensuite été analysées par HPLC et RMN afin que nous
 \subsection{Analyse des résultats}
 
 
-
+Après analyse du spectre RMN obtenu, nous avons pu conclure que les solutions finales contenaient bien de la pyridine, synthétisée comme nous l'avions prévu. (Voir Exploitation du spectre RMN en Annexe)
 
 
 
@@ -359,13 +370,22 @@ Nous avons ensuite utilisé deux méthodes différentes pour isoler notre produi
 Pour nos deux réactions en milieux basique nous avons fait une distillation car le dichlorométhane a réagi avec le Mn02 et possède comme vu précédemment une faible température d’ébullition.
 Pour les deux réactions en milieux acide nous avons effectué une extraction en ajoutant du carbonate de sodium ( une base ) afin qu’elle réagisse avec l’acide et forme la phase aqueuse  moins dense que la phase organique. De cette façon nous avons pu récupérer notre phase organique contenant notre produit, nous avons répété cette opération trois fois pour plus de précision. Pour retirer totalement l’eau présente dans notre solution on avons ajouté du sulfate de magnésium anhydre MgSO4. Ce dernier va précipiter en présence de l’eau. Une simple filtration a suffi pour l’enlever de la solution.  Enfin nous avons terminé par une distillation pour enlever le dichlorométhane encore présent de la première filtration.
 Enfin pour nos 4 solutions on fait un chromatographie sur colonne avec de la Silice pour enlever les dernières impuretés, et  pour bien vérifier la pureté de nos produit nous avons réalisé une chromatographie sur couche mince avec un produit témoin.
+Après vérification, nous avons pesé nos produits purifiés.
+L'expérience témoin a obtenu 22,1mg de produit, la seconde a eu 13,8mg, le réaction 3 a rendu 6,3mg et la dernière 23mg. Ces données vont nous permettre de calculer le rendement énantiosélectif pour chaque expérience.
+
+\subsubsection{Exploitation du spectre RMN}
+
+\begin{center}
+\includegraphics[scale = 0.18]{Courbes_RMN}
+\end{center}
+
+
 
 \subsubsection{High performance liquid chromatography ( HPLC )}
 
 
-La HPLC est une technique d’analyse qui va permettre de séparer et quantifier les molécules présentent dans un mélange. Le système est constitué d’une phase mobile qui est un solvant qui va être mis sous pression grâce à l’aide d’une pompe, le solvant va passer à très grande vitesse dans l’injecteur où est situé notre échantillon de mélange qui va être emporté par le solvant jusqu’à une colonne où il seront séparés grâce à la phase stationnaire présente dans la colonne en fonction de l’affinité que chaque molécule a avec cette dernière. A la sorti de la colonne il y a un détecteur qui va repérer à quel temps et en quelle quantité chaque molécule passe, puis le détecteur envoie les informations à l’ordinateur pour qu’il puisse générer un chromatogramme qui a pour abscisse l’intensité du signal et pour ordonnée  le temps. Ainsi on pourra voire un pic plus ou moins grand en fonction de la quantité de matière pour chaque molécule présente.
-
-
+La HPLC est une technique d’analyse qui va permettre de séparer et quantifier les proportions des molécules présentes dans un mélange. Le système est constitué d’une phase mobile qui est un solvant qui va être mis sous pression à l’aide d’une pompe. Le solvant va passer à très grande vitesse dans l’injecteur où est situé notre échantillon de mélange. Il va alors être emporté par le solvant jusqu’à une colonne dans laquelle se trouve une phase stationnaire (immobile). Cette phase stationnaire a des affinités différentes avec les différents composants du mélange. Ainsi ils vont évoluer le long de la colonne à des vitesses différentes. A la sortie de la colonne il y a un détecteur qui va repérer à quel temps et en quelle quantité chaque molécule passe, les molécules sont ensuite récupérées dans un réservoir. Le détecteur envoie les informations à l’ordinateur pour qu’il puisse générer un chromatogramme.Ce dernier aura pour abscisse l’intensité du signal et pour ordonnée  le temps. Ainsi on pourra voire un pic plus ou moins grand en fonction de la quantité de matière pour chaque molécule présente.
+\includegraphics{}
 
 \medbreak
 
