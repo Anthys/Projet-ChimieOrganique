@@ -1,0 +1,549 @@
+\documentclass{article}
+% * <julbarres@gmail.com> 10:35:15 16 Apr 2019 UTC+0200:
+% Les accents et les apostrophes n'apparaissent pas, mais c'est quand même plus facile pour travailler que le gdoc. Quand on aura finis, je transférerais vers overleaf, où les accents apparaissent
+\usepackage[utf8]{inputenc}
+\usepackage[portrait, margin=1.45in]{geometry}
+\usepackage{graphicx}
+\usepackage{scrextend}
+\graphicspath{ {./images/} }
+\usepackage{gensymb}
+
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+
+\newenvironment{myindentpar}[1]%
+  {\begin{list}{}%
+          {\setlength{\leftmargin}{#1}}%
+          \item[]%
+  }
+  {\end{list}}
+
+\title{Rapport de projet \\  \bigskip Conversion de chiralité}
+\author{Tristan Bagnis, Julien Palanca, Julien Barrès, Adrien His}
+\date{\parbox{\linewidth}{\centering%
+  \endgraf\bigskip
+  Encadrant : Xavier Bugaut \endgraf \bigskip
+  L1 MPCI \endgraf (2018-2019) \endgraf
+    Université Aix-Marseille}}
+
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+
+\newcommand{\pparagraph}[1]{\paragraph{#1}\mbox{}\\}
+
+\begin{document}
+
+\makeatletter
+\renewcommand{\@maketitle}{%
+\newpage
+\null
+\vfil
+\begingroup
+\let\footnote\thanks
+\centering
+{\LARGE\@title}\vskip1.5em
+{\large\@author}\vskip1em
+{\large\@date}
+
+\endgroup
+\vfil
+\begin{center}
+\includegraphics[scale = 0.3]{logo}
+\includegraphics[scale = 0.3]{LogoEcm}
+\end{center}
+}
+\makeatother
+
+\maketitle
+
+\newpage
+
+\begin{center}
+\section*{Remerciement}
+\end{center}
+\bigskip
+\medbreak
+Nous souhaitons tout d'abord remercier notre encadrant de projet Monsieur \textbf{Xavier Bugaut} du laboratoire iSm2. Nous le remercions pour nous avoir accompagné tout au long de ce projet, d'avoir pris le temps et eu la patience de répondre à nos questions. Nous le remercions également pour avoir terminé  nos deux dernières chromatographies sur colonne que nous n'avions pas pu terminer faute de temps. Enfin, nous le remercions pour avoir relu notre rapport et nous avoir conseillé sur sa conception. \medbreak
+Nous remercions les équipes du laboratoire iSm2 pour nous avoir accueilli et aidé lors de la réalisation de nos expériences, notamment Monsieur \textbf{Nicolas Vanthuyne} pour les séparations HPLC.\medbreak
+Nous tenons également à remercier Mme. \textbf{Guillemette Chapuisat} du laboratoire I2M et M. \textbf{Philippe Marsal} du CINaM pour nous avoir reçu à deux reprises afin de connaître notre avancement dans le projet et de nous avoir donné des outils de travail qui nous ont permis d'être plus efficace dans ce projet.\medbreak
+Nous tenons également à remercier la \textbf{licence MPCI} qui nous a permis de réaliser un tel projet et de nous avoir donné un avant goût du métier de chercheur.\medbreak
+Enfin nous remercions notre jury pour avoir porté attention à notre projet dont l'enjeu est encore le sujet de recherches actuelles.
+
+\medbreak
+
+
+
+\medbreak
+
+
+\newpage
+\begin{center}
+\section*{Introduction}
+\end{center}
+\bigskip
+\bigskip\bigskip
+L’étude de la chiralité est un sujet important dans beaucoup de domaines liés à la santé ou à la fabrication de polymères. En effet, les molécules qui possèdent cette propriété ont de nombreuses caractéristiques intéressantes. Certains récepteurs biologiques sont par exemple chiraux, et n’acceptent qu’une des deux configurations de la molécule porteuse du signal. L’usage de solutions synthétisées sans prise en compte de la chiralité des molécules peut ainsi devenir dangereux, la prise de ces médicaments interagissant avec certains de ces récepteurs.\par
+\bigbreak
+C’est en effet ce qu’il s’est passé dans les années 50 lorsqu’un sédatif anti-nauséeux, le thalidomide, a été mis sur le marché et a provoqué de graves malformations congénitales sur certains enfants de femmes enceintes ayant pris ce médicament. Les propriétés recherchées par ce sédatif étaient en réalité possédées par un des deux énantiomères* de la molécule du thalidomide, alors que le second était dangereux pour le corps humain. Le médicament était un racémique*, conçu sans sélectivité sur les énantiomères, ce qui a provoqué une grave crise sanitaire. Si depuis, les connaissances sur le contrôle de la chiralité due à la présence de centres stéréogènes ont grandement évolué, c'est moins le cas pour d'autres formes de chiralité, qui ont été peu étudiées.
+\bigbreak
+Notre projet se concentre sur l’étude de la conversion de chiralité, c’est à dire le passage d’un type de chiralité à un autre (ici chiralité centrale à chiralité axiale*), réaction qui devra avoir un bon ratio énantiosélectif et un bon rendement. Ces deux paramètres sont en effet ceux qui sont intéressants pour la réalisation d’une telle synthèse, car ils indiquent s’il est possible d'effectuer efficacement une conversion de chiralité, sans avoir à faire de séparation, ce qui est coûteux en temps et en argent.
+\bigbreak
+Notre projet se place ainsi dans la continuité d’une thèse traitant le même sujet publiée en 2016 par Ophélie Quinonero: “Synthèse organo-catalysée énantiosélective de 4-arylpyridines atropoisomères par conversion de chiralité centrale à axiale : application vers la synthèse totale de la streptonigrine”. Nous cherchons ici plus précisément à savoir s’il est possible d’améliorer encore les résultats obtenus par cette étude, en traitant le réactif le plus efficace de plusieurs manières.
+\bigbreak
+Dans la première partie de notre rapport, nous aborderons le côté théorique de notre problème, nous décrirons la structure de la molécule de dihydropyridine en analysant les étapes nécessaires au passage de dihydropyridine (molécule en chiralité à centre stéréogène) à la pyridine (molécule à chiralité axiale) et l’importance de la géométrie de la molécule de départ. Nous aborderons ensuite la manière dont nous pouvons quantifier plusieurs paramètres de notre problème à prendre en compte, comme la barrière de rotation de la dihydropyridine ou l'énergie d’activation de la réaction. Nous exposerons ensuite nos résultats expérimentaux pour chacun des réactifs étudiés, et nous exploiterons ces résultats afin de tirer une conclusion sur la manière d’améliorer et de contrôler la réaction de conversion de chiralité.
+
+\newpage
+
+\tableofcontents
+\bigbreak
+\bigbreak
+\bigbreak
+\textit{Tous les termes annotés d’un “*” sont définis en Annexe.}
+
+\newpage
+\section{Géométrie des molécules}
+
+\medbreak
+\par
+\subsection{Analyse de la réaction}
+
+
+\begin{center}
+\includegraphics[scale = 0.4]{reactnio}
+\end{center}
+ \hspace{3cm} Dihydropyridine \hspace{4cm} Pyridine
+ \medbreak
+ \medbreak
+
+Comme exposé en introduction, la réaction de conversion de chiralité étudiée dans ce projet est la transformation de dihydropyridine (DHP) en pyridine, représentée ci-dessus. \par
+\medbreak
+Cette réaction est une réaction d’oxydation : on observe l’élimination de deux atomes d’hydrogène (entourés en rouge), ainsi que la formation d’une nouvelle double liaison.  On remarque également que l’intégralité de la réaction se fait au niveau du cycle principal, sans que le reste de la molécule ne soit modifié.
+Afin de réaliser cette réaction, il est donc nécessaire de trouver un réactif dont les affinités avec la DHP lui permettront de retirer ces deux atomes d’hydrogène. De par les effets inductifs internes au cycle et au besoin de respecter la règle de l’octet, les doubles liaisons du cycle principal se briseront et se reformeront afin de former le cycle aromatique* que l’on observe sur le schéma de la pyridine.
+
+Comme le reste de la molécule n’est pas modifiée par cette transformation, l’apparition de ce cycle aromatique est bénéfique pour la stabilité de la molécule, après réaction. Autrement dit, nous pouvons supposer que la réaction de conversion de chiralité se fera ici majoritairement dans un sens, les molécules de pyridine étant plus stables que celles de dihydropyridine.
+
+\medbreak
+
+\begin{center}
+\includegraphics[scale = 0.12]{DHPCOLOR}
+\end{center}
+
+
+\medbreak
+C’est donc cette réaction qui va provoquer la conversion de chiralité. En effet, l’atome d’hydrogène le plus au centre de la molécule de DHP est relié à son centre stéréogène. Après la réaction, cet atome de carbone asymétrique n’en est plus un, car n’est plus lié qu’à trois atomes. La molécule de pyridine n’a donc plus de centre stéréogène.
+\smallbreak
+Cependant, elle sera quand même chirale. En effet, elle va posséder une nouvelle caractéristique : lorsque le groupement entouré en rouge ci-avant effectue une rotation autour de l’axe liant les deux groupes colorés, un blocage est observé avec la liaison C=O du groupe vert. Contrairement à la DHP, la pyridine n’a donc pas une rotation totalement libre. Due à cette propriété, cette molécule est dite à chiralité axiale, car c’est la rotation des deux groupes autour de l’axe (et non d’un carbone) qui détermine la configuration de la molécule. Elle est également appelée atropoisomère, due au blocage observé. Deux énantiomères différents de la pyridine sont alors observés, nécessitant une certaine énergie pour passer de l’un à l’autre. Si la barrière d'énantiomérisation ne correspond pas au brisage d’une liaison mais plutôt à une déformation de la liaison à l’origine du blocage, l'énergie qu’elle demande est suffisamment haute pour être considérée comme semblable.
+\medbreak
+D’un point de vue énergétique, si la molécule de pyridine est virtuellement partagée en deux comme sur la figure précédente, il est observé que les deux groupements colorés sont semblables à deux plans, perpendiculaires l'un à l'autre, ce qui limite les interactions entre les groupes de part et d'autre de l'axe de chiralité, alors que les groupes de la DHP sont plus inclinés l’un sur l’autre. Ceci augmente donc les interactions internes aux atomes de la DHP.\par
+
+
+\medbreak
+
+\subsection{Contrôle de la position des deux sous-groupes}
+
+Nous nous sommes ensuite intéressé à l’importance du contrôle des groupes (vert et rouge), cette fois-ci sur la DHP. En effet, c’est justement cette orientation qui semble être l’élément crucial de notre réaction énantiosélective : c’est elle qui va définir si la molécule produite sera l’énantiomère (aS)* ou (aR)* de la pyridine. (Voir schéma suivant).
+\medbreak
+Si nous ne considérons qu’un seul des deux énantiomères de la DHP, il est, en effet, possible d'obtenir les deux énantiomères de la pyridine, sans aucune sélectivité, en considérant que la rotation sur la DHP est libre (hypothèse abordée dans la partie Aspect énergétique).
+Il est ainsi possible de dire que les deux conformations de la DHP sont en relation de diastéréoisomèrie, et nous pouvons appeler ces deux conformations "endo" (groupement $OCH_3$ situé en dessous de la DHP) ou "exo" (groupement $OCH_3$ situé vers l’extérieur). Cette dénomination est cependant relative, car l'énergie demandée au passage d'une conformation à une autre dépend des conditions de l’expérience (en particulier, elle varie avec la température).
+\medbreak
+Il en vient ainsi que l’étude et le contrôle de cette rotation sont capitaux pour notre réaction. Dans la prochaine partie, nous aborderons les concepts de “barrières de rotation” dont nous avons parlé précédemment et de chemins réactionnels, qui définissent la réaction globale ainsi que les proportions des énantiomères produits. Ces concepts permettent ainsi de quantifier ce que nous avons observé qualitativement, et de nous donner des éléments pour choisir un réactif adéquat.
+
+\begin{center}
+\includegraphics[scale = 0.35]{alpha2}
+\end{center}
+
+\newpage
+
+
+
+\section{Aspect énergétique et chemins réactionnels}
+
+Il est donc nécessaire de comprendre comment varie cette barrière énergétique qui a été observée dans la première partie. Comme c’est elle qui détermine en grande partie le ratio d’énantiomères produits, il est important de connaître son ordre de grandeur, afin de savoir si la rotation des groupes est plutôt “libre” (barrière énergétique faible) ou “bloquée” (barrière énergétique haute).
+
+\subsection{Barrière de rotation et enthalpie libre d’activation}
+
+\subsubsection{Barrières de rotations}
+\medbreak
+Comme dit précédemment, il est possible de quantifier l'enthalpie libre nécessaire au passage d'une conformation d'une molécule à une autre par rotation, qui est alors appelée barrière de rotation.
+\medbreak
+Cette barrière provient des interactions de Van der Waals ainsi que des forces de Coulomb. Dans le cadre de notre projet, cette grandeur est particulièrement importante : c’est elle qui va nous permettra de quantifier la difficulté de passage d’une conformation à une autre pour la molécule. Nous pourrons ainsi mieux estimer s'il est possible de “bloquer” certaines conformations, ou bien au contraire de passer rapidement de l'une à l'autre. C’est un point primordial dans le cadre de la synthèse énantiosélective. Comme dit précédemment, c’est justement la conformation de la dihydropyridine qui détermine la configuration de la pyridine qui sera synthétisée.
+\medbreak
+Il est possible, par simulation ou expérimentalement, de déterminer les constantes de vitesse k de la réaction de passage d’une conformation à une autre. Elles vont définir la difficulté de ce passage. Ces constantes peuvent être utilisées dans l’équation d’Eyring abordée par la suite, afin de déterminer la barrière de rotation.
+De plus, connaissant les deux constantes de vitesses, l'équilibre K est défini comme le rapport des constantes de vitesse : $K=\frac{k^1}{k^{-1}}$
+
+Finalement, nous savons que ces barrières varient en fonction des critères de l'environnement comme la température, le solvant ou les réactifs. L’intérêt pour nous ici va donc être de jouer sur ces facteurs afin de pouvoir préférer certaines réactions à d'autres, toujours dans l’optique d'avoir la meilleure énantiosélectivité possible.
+\medbreak
+
+\subsubsection{Notion d'enthalpie libre}
+\medbreak
+Pour étudier les différences énergétiques entre les molécules, nous devons nous intéresser aux notions d’entropie et d’enthalpie propres aux molécules. Cependant, les molécules étudiées ici sont des stéréoisomères, et il est acceptable de faire l'approximation que les différences d'entropie sont négligeables. Par définition de l'enthalpie libre, celle-ci ne varie donc plus en fonction de la température, ce qui en fait une grandeur intéressante à étudier.
+
+L'enthalpie libre est une fonction d'état, qui est également un potentiel thermodynamique, ici propre à la molécule étudiée. Elle est peut également être utilisée pour quantifier les barrières de rotation des molécules. La différence d’enthalpie libre entre un état initial et l’état de transition* de la réaction est alors appelée enthalpie libre d’activation.
+
+\newpage
+
+\pparagraph{L'équation d’Eyring}
+
+
+L’équation d’Eyring relie la vitesse d’une réaction chimique avec la température et l'enthalpie libre d'activation :
+\medbreak
+
+$$k=\frac{k_BT}{h}\exp{(\frac{-\Delta G^{\ddagger}}{RT})}$$ 
+\medbreak
+
+Avec k la constante de vitesse, R la constante des gaz parfait, T la température, $k_B$ la constante de Boltzmann, $\Delta G^{\ddagger}$ l’enthalpie libre d’activation et h la constante de Planck. Cette relation fait intervenir l’énergie d’activation, ici $\Delta G^{\ddagger}$, ainsi que k et T. En connaissant deux de ces variables, il est donc possible de déterminer la troisième.
+\medbreak
+
+Faire varier cette enthalpie libre d'activation peut permettre de préférer certaines sous-réactions à d'autres, voire même à en bloquer certaines, s'il est observé que leur enthalpie libre d'activation est trop grande.
+
+
+\medbreak
+
+Il semble donc important de trouver un réactif qui fera en moyenne plus une réaction que l'autre, peut-être en interagissant avec certains atomes d'oxygène. Il semble également logique que retirer les deux hydrogènes nécessaires pour former la pyridine est une opération qui demandera plus ou moins d'énergie en fonction de l'orientation des groupes de la dihydropyridine.
+
+\medbreak
+
+
+\par
+
+
+
+\subsubsection{Estimation des barrières de rotation}
+
+\medbreak
+
+Afin d’avoir une idée quantitative de l’importance de la barrière d'énergie lors de l'énantiomérisation de la pyridine (blocage fort ou faible), nous avons décidé d’utiliser les résultats expérimentaux de la thèse ayant déjà fait cette réaction pour déterminer une valeur du temps de demie-vie à 20\degree C, soit plus ou moins la température du milieu dans lequel nous ferons nos expériences.
+\medbreak
+A partir de la loi d’Eyring et de la valeur de $\Delta G^{\ddagger} = 115.4$ kJ.mol$^{-1}$ obtenu par la précédente expérience par suivi cinétique de l'énantiomérisation, nous avons pu déterminer que le temps de demie-vie à 20\degree C est d’environ 245 jours. (Voir calcul complet en Annexe). Ainsi, il est possible d'assumer que cette réaction de passage d’une configuration à une autre est extrêmement lente, et qu'elle peut être considérée comme bloquée.
+\medbreak
+Cela valide donc notre hypothèse que dans notre milieu réactionnel, les deux énantiomères de la pyridine ne sont pas en équilibre, et il est donc possible d'étudier l'énantiosélectivité de notre réaction en analysant les produits.
+
+\newpage
+
+\subsection{Chemins réactionnels}
+
+A partir des données quantitatives de barrières énergétiques que nous avons estimé, il est possible de représenter graphiquement des “chemins réactionnels”, caractérisant le déroulement global et énergétique de la réaction étudiée.
+Il est ainsi possible de juger qualitativement l'intérêt de certains scénarios énergétique comparativement à d’autres, et de déterminer quel scénario serait le plus pertinent dans notre situation. Voir \hyperlink{ExplChem}{"Chemins réactionnels"} en Annexe pour une aide à la lecture.
+
+\medbreak
+
+Nous allons déterminer théoriquement les chemins réactionnels qui permettraient dans un cas idéal de réaliser cette synthèse énantiosélective, et étudier celui qui apparaît comme le plus efficace.  En observant la plupart des chemins binaires qu'il est possible d'obtenir (en se restreignant à des enthalpies libres d'activation "élevées" ou "faibles"), nous avons pu déterminer deux chemins intéressants que nous allons développer plus précisément.
+Dans les deux prochains schémas, les deux conformations de la DHP (représentés par les deux états énergétiques les plus au centre) sont appelées "endo" et "exo". Le premier représente la conformation où le groupement $OCH_3$ est situé au dessus de la DHP, et le second où ce groupement est dirigé vers l'extérieur de la molécule.
+\medbreak
+
+\medbreak
+
+\pparagraph{Premier scénario}
+
+
+\begin{center}
+\includegraphics[scale = 0.32]{Courb1}
+\end{center}
+
+\textit{Légende : ET état de transition (très faible durée de vie) , endo et exo conformation de la DHP, aR aS configuration absolue pour l’axe stéréogène des produits, $\Delta G^\ddagger_{ox}$ enthalpie d’activation de la réaction, les enthalpie des énantiomères (aS) et (aR) sont inférieures car ce sont des aromatiques, qui sont plus stables que les molécules de DHP, et leurs enthalpies sont  identiques entre elles car 2 énantiomères ont la même enthalpie libre.}
+
+\medbreak
+
+Dans ce premier chemin, une forte barrière de rotation $\Delta G^\ddagger_{rot}$ est présente entre les deux conformations de la DHP, ce qui induit un passage difficile de l'une à l'autre. Il est à noter que la conversion sera donc partielle car la DHP exo réagit moins facilement que la DHP endo, dû à la valeur haute de $\Delta G^\ddagger_{ox}(aS)$ par rapport à $\Delta G^\ddagger_{ox}(aR)$.\medbreak
+Le premier scénario valable se place donc dans le cadre d’un dédoublement cinétique, c’est à dire que le produit qui se forme le plus rapidement est majoritaire. \medbreak
+ Afin de répondre à cela, il faut que les réactions d'oxydations des deux conformations de la DHP s'effectuent à des vitesses différentes. Cela se traduit sur le diagramme énergétique par une énergie d’activation d’oxydation $\Delta G^\ddagger_{ox}$ ( énergie pour lancer la réaction d’oxydation, pour passer des états de départ aux états de transition) élevée pour une conformation par rapport à la seconde. Cette différence d'énergie entre les états de transition est expliquée par le fait qu'ils correspondent à deux diastéréoisomères*. En effet, les diastéréoisomères ont des enthalpies libres différentes entre eux contrairement aux énantiomères qui ont la même enthalpie libre.
+   
+\medbreak
+ 
+
+\pparagraph{Deuxième scénario}
+
+\begin{center}
+\includegraphics[scale = 0.32]{Courb2}
+\end{center}
+
+\textit{Légende : ET état de transition (très faible durée de vie) , endo et exo conformation de la DHP, aR aS configuration absolue pour l’axe stéréogène des produits, $\Delta G^\ddagger_{ox}$ enthalpie d’activation de la réaction, les enthalpie des énantiomères (aS) et (aR) sont inférieures car ce sont des aromatiques, qui sont plus stables que les molécules de DHP, et leurs enthalpies sont  identiques entre elles car 2 énantiomères ont la même enthalpie libre.}
+\medbreak
+
+Le second chemin réactionnel envisageable est similaire au premier du point de vue des enthalpies libres d’activation d’oxydation, seule la barrière de rotation diffère (barrière de passage entre les conformations endo et exo). La barrière de rotation des conformations est relativement faible, ce qui implique un passage rapide de l'une à l'autre et un équilibre rapide. Il est tout de même notable que l'une des deux énergies d’activation d’oxydation est supérieure aux autres états énergétiques, ce qui implique que cette réaction peut être "bloquée", si une énergie inférieure est fournie au système.
+\medbreak
+
+Nous avons conclu que le second chemin est plus adéquat à la réalisation d’une synthèse asymétrique. En effet, dans le premier cas présenté la quantité des produits obtenue est dépendante de la concentration initiale de chaque conformères de la DHP. Dans le second scénario, cette quantité est seulement due aux enthalpies libres d'activation des oxydations $\Delta G^\ddagger_{ox}$. Les conformères peuvent avoir des enthalpies libres différentes (ce qui se traduit sur le diagramme par des niveaux énergétiques différents pour les conformations endo et exo), ce qui entraîne que l'une des conformations est plus stable. Mais comme la barrière de rotation est faible et qu'il y a une différence d’énergie d’activation d’oxydation  $\Delta G^\ddagger_{ox}$, seul le conformère le plus réactif est synthétisé (ici "endo"), et celui qui ne réagit pas (ou peu) est converti en l'autre conformère.
+
+\medbreak
+
+
+Le temps de demie-vie correspondant au passage d'une conformation à une autre de la DHP a été estimé dans l'ordre de du millième de seconde, à 20\degree. (Cette valeur a été obtenue par la thèse sur laquelle se base notre projet, par plusieurs RMN à différentes températures). Notre hypothèse sur la faiblesse de la barrière de rotation de la DHP est donc validée: le second chemin est le plus réaliste.
+
+\medbreak
+
+Notre objectif est donc de se placer dans des conditions expérimentales permettant de tendre vers le second chemin présenté ci-dessus. Nous pourrons ainsi fournir une énergie qui permettra de transformer la DHP en pyridine (aR), mais qui sera inférieure à l'énergie de la barrière énergétique vers la conformation (aS).
+
+
+
+\newpage
+
+
+\section{Résultats expérimentaux}
+
+
+
+\subsection{Démarche expérimentale}
+
+La thèse sur laquelle se base notre projet a conclu que le réactif le plus efficace pour effectuer cette réaction de conversion de chiralité est le dioxyde de manganèse $MnO_2$. Nous avons ainsi décidé de réutiliser ce réactif et de le traiter de plusieurs manières afin d’observer les impacts de ce traitement sur le rendement final.
+Pour ces expériences, nous avons utilisé une solution énantioenrichie de DHP préalablement préparée avec un excès énantiomérique* de 95\%.
+\medbreak
+La première expérience qui a été réalisée est une expérience témoin avec le $MnO_2$ non traité dans du cyclohexane comme solvant. Elle servira d’élément de comparaison pour les trois autres expériences. Cette expérience est réalisée dans les mêmes conditions que l'expérience de la thèse. (milieu neutre) .
+ \medbreak
+La seconde expérience consiste en l’utilisation de $MnO_2$ sur charbon actif préparé par réaction entre le permanganate de potassium $KMn0_4$ et le charbon. Nous pensons en effet que le charbon actif, souvent utilisé comme catalyseur, aura un impact de par ses effets sur la cinétique et l'énantiosélectivité de la réaction. (milieu neutre)
+\medbreak
+Lors de la troisième expérience utilise le $MnO_2$ dans un milieu d'acide trichloroacétique et d'acétonitrile (milieu acide).
+\medbreak
+Dans notre dernière expérience nous avons également utilisé de l’acide trichloroacétique mais cette fois mélangé avec du chloroforme (milieu acide).
+\medbreak
+Pour ces deux dernières expériences, le but est d'étudier l'influence d'un acide sur le phénomène de conversion de chiralité centrale à axiale. Nous nous attendons à observer des vitesses d'oxydation différentes selon les conformations, et donc des proportions énantiomériques différentes dans le produit final. Lors de la troisième et quatrième expérience, nous utilisons deux  solvant différents (acétonitrile et chloroforme) afin d'étudier leurs effets sur l'efficacité de l'acide trichloroacétique.
+\medbreak
+Nous avons laissé les réactions se faire pendant 24h puis nous avons isolé la pyridine.
+Les solutions finales ont ensuite été analysées par HPLC pour mesurer l'excès énantiomérique et RMN pour vérifier la structure des produits.
+
+
+\subsection{Analyse des résultats}
+
+
+Après analyse du spectre RMN obtenu, nous avons pu conclure que les solutions finales contenaient bien de la pyridine, synthétisée comme nous l'avions prévu. (Voir Exploitation du spectre RMN en Annexe).
+\medbreak
+Nous avons ensuite exploité les courbes HLPC* obtenues par l'étude de chaque solution, afin d'obtenir l'énantiosélectivité des quatre réactions effectuées. En effet, la HPLC consiste en une chromatographie chirale permettant de séparer les deux énantiomères de la pyridine de la solution finale, et donc permettant d'obtenir leur excès énantiomérique.
+
+\medbreak
+
+Ci-après,  respectivement les chromatogrammes des réactions avec du $MnO_2$, du $MnO_2$ sur charbon actif et du $MnO_2$ en milieu acide (l'acide trichloroacétique avec traitement au chloroforme). Il est à noter que le fait que les deux signaux apparaissant sur le chromatogramme correspondent bien aux énantiomères a été vérifié préalablement par analyse du racémique.
+
+
+\begin{center}
+\includegraphics[scale = 0.3]{CourbeAH}
+\includegraphics[scale = 0.30]{CourbeJB}
+\includegraphics[scale = 0.3]{CourbeTB}
+\end{center}
+
+\newpage
+
+\smallbreak
+
+Nous observons donc que les modifications apportées à cette réaction n'ont pas permis d'améliorer l'énantiosélectivité. Ces réactions sont donc moins efficaces que l'expérience témoin. Une inversion de l'énantiomère majoritaire de la pyridine est cependant remarquable, pour la réaction effectuée en milieu acide.
+
+
+\medbreak
+
+Les pics apparaissant sur ces trois chromatogrammes sont les deux énantiomères de la pyridine, sortant de la colonne chirale à deux instants différents, en fonction de leurs affinités avec la phase stationnaire de la colonne chirale. L'intégration de l'aire de ces courbes donne la quantité de chaque énantiomère, et comparer ces deux aires peut ainsi permettre d'obtenir le ratio énantiomérique de la solution.
+\medbreak
+Le pourcentage de chaque énantiomère a été reporté dans les tableaux situés sous les courbes. 
+L'énantiomère majoritaire n'est pas toujours le même, comme on peut le voir sur la troisième expérience (XB - TB), où l'énantiomère le plus lent de la colonne est majoritaire, contrairement aux deux autres. On peut supposer que ce changement est dû au milieu acide.
+\medbreak
+Pour l’expérience témoin (XB - AH), le ratio énantiomèrique observé est de (88/12), soit un excès énantiomèrique de 76\%.
+\smallbreak
+Pour l'expérience du charbon actif (XB - JB), le ratio est de (70/30), soit un excès énantiomèrique de 40\%.
+\smallbreak
+Enfin pour l'expérience en milieu acide (XB - TB), avec traitement au chloroforme, le ratio est de (78/22), et son excès énantiomèrique est de 56\%.
+
+\medbreak
+\textit{La quatrième expérience (milieu acide, traitement à l'acétonitrile) n’apparaît pas dans les données car n'a pas été concluante, et a été jugée comme inexploitable.}
+
+\medbreak
+Ainsi, il est observable l'énantiosélectivité de cette convsersion de chiralité est fortement dépendante du milieu réactionnel. Nous avons constaté que lorsque le réactif est traité (comparativement à l'expérience témoin), l'énantiosélectivité de la réaction baisse. Cependant, à partir d'une même molécule de DHP, il est possible d'obtenir un énantiomère ou l'autre de la pyridine en excès en changeant le milieu réactionnel (ici acide). 
+
+
+
+\newpage
+
+\section{Conclusion}
+
+Au cours de ce projet, nous avons pu observer les étapes importantes à la réalisation d'une réaction énantiosélective de conversion de chiralité. 
+Nous avons d'abord analysé le déroulement de la réaction, et la manière dont les molécules de DHP et leur géométrie sont modifiées à travers elle.\par
+Nous avons pu observer l'importance du contrôle de la rotation des sous groupes de la molécule de dihydropyridine, en étudiant qualitativement plusieurs chemins réactionnels possibles.\par
+\medbreak
+Nous avons ensuite réalisé quatre expériences dans le but d'améliorer encore les résultats d'une précédente étude portant sur le même sujet.
+\medbreak
+Cependant, chaque méthode de traitement du $MnO_2$ réalisée ici a obtenu un excès énantiomèrique plus faible que celui de la réaction témoin, non-traitée. Ces traitements proposés n'ont donc pas permis d'améliorer l'énantiosélectivité de la synthèse de la pyridine. Néanmoins la réaction effectuée en milieu acide a permis de mettre en relief la possibilité de renverser la stéréosélectivité de cette conversion de chiralité.
+\medbreak
+Il est cependant possible qu'il existe d'autres pistes non étudiées lors de ce projet permettant d'optimiser encore l'énantiosélectivité de cette conversion de chiralité.
+
+
+
+
+
+
+
+\newpage
+
+\section{Annexe}
+
+\subsection{Définitions}
+\bigskip
+
+\pparagraph{Chiralité axiale}
+
+La chiralité axiale est une forme de chiralité caractérisée par un axe stéréogène, au lieu d’un centre stéréogène qui défini la chiralité centrale, plus habituelle. Dans ce cas, les deux substituants de part et d’autre de l’axe stéréogène sont dans une disposition spatiale fixée non superposable à son image dans un miroir.    
+\medbreak
+
+\pparagraph{Enantiomère}
+
+Deux stéréoisomères de molécules chirales sont dits énantiomères l’un de l’autre s'ils sont images l’un de l’autre dans un miroir, mais ne sont pas superposables. C’est le cas ici des deux configurations de la molécule de dihydropyridine, et également de la pyridine.
+
+\medbreak
+\pparagraph{Diastéréoisomère}
+
+Deux stéréoisomères sont dits diastéréoisomères l’un de l’autre s'ils ne sont pas image l’un de l’autre dans un miroir.
+\medbreak
+\pparagraph{Racémique}
+
+Un racémique est un mélange de deux énantiomères d’une molécule chirale, en proportion égales (50\% de l’une, 50 \% de l’autre). C’est en général ce type de mélange que l’on obtient en synthétisant une molécule chirale sans chercher à contrôler sa chiralité (le plus souvent, dans un milieu non-chiral).
+\medbreak
+\pparagraph{Excès énantiomérique}
+ 
+%Solution qui possède un énantiomère en grande proportion par rapport au second.
+
+L'excès énantiomérique mesure l'énantiosélectivité d'une réaction.\par
+Il se calcule par : $ee = |n_+ - n_-|*100\%$ avec $n_+$ la quantité ou la proportion de l'énantiomère majoritaire et $n_-$ celle de l'énantiomère minoritaire.\par
+Ainsi, plus l'excès énantiomèrique d'une réaction est grand, plus elle est énantiosélective.
+
+\medbreak
+\pparagraph{Cycle aromatique}
+
+Un cycle aromatique est un cycle plan comprenant 4n + 2 électrons $\Pi$ délocalisables. L’exemple le plus courant est le benzène. Une des principales caractéristiques du cycle aromatique est la grande stabilité qu’il procure à la molécule dont il fait partie.
+
+\medbreak
+\pparagraph{Rotation libre}
+
+Une rotation est dite libre lorsque l'énergie demandée pour le passage d'une conformation à l'autre de la molécule considérée est très faible, autrement dit que les groupements étudiés de la molécule peuvent tourner les uns par rapport aux autres sans blocage.
+\medbreak
+\pparagraph{État de transition}
+
+Un état de transition est un état instable d'une molécule, qui représente le moment ou le maximum d'énergie nécessaire au lancement de la réaction a été fourni, mais avant que la molécule ne se stabilise vers le produit possédant le niveau énergétique le plus bas.
+\medbreak
+
+\pparagraph{Configuration absolue d'une molécule à chiralité axiale, (aS) et (aR)}
+
+La détermination de la configuration absolue d'une molécule à chiralité axiale suit dans les grandes lignes celle de la chiralité centrale. En se plaçant le long de l'axe chiral, et en plaçant le groupement de plus faible priorité vers le bas, on peut déterminer la configuration absolue de la molécule. Il faut observer le sens de rotation du chemin suivi pour parcourir les groupements par ordre croissant de priorité (le quatrième groupement, de plus faible priorité, est ignoré). 
+
+\medbreak
+
+
+\pparagraph{Chemins réactionnels}
+\hypertarget{ExplChem}{}
+\begin{center}
+\includegraphics[scale = 0.12]{beta}
+\end{center}
+
+Ici, si les molécules A et B sont conformères l'une de l'autre, alors on appelle l’énergie nécessaire pour passer de A à B l'enthalpie de rotation, et se note $\Delta G ^{\ddagger} _{rot}$. Plus la valeur de cette énergie est élevée, plus la rotation de A à B est lente.\par
+Si le passage de la molécule A à la molécule C se fait par une oxydation, alors l’énergie nécessaire à l'activation de cette réaction est notée $\Delta G ^{\ddagger} _{ox}C$.
+\pparagraph{Abréviations}
+
+DHP = Dihydropiridine
+
+
+
+
+\medbreak
+
+\subsection{Protocoles}
+
+\subsubsection{Synthèse de la pyridine}
+
+Lors de la première expérience  24 mg de DHP sont mélangés avec 3,5 mL de cyclohexane, qui constitue le solvant, et 102 mg de $MnO_2$. \par
+Pour la seconde expérience  24 mg de DHP sont mélangés avec 3,5 mL de cyclohexane et 102 mg de $MnO_2$ sur charbon actif.\par
+Dans la troisième expérience 41 mg de DHP sont mélangés avec de l’acide trichloroacétique dans de l’acétonitrile et 174mg de $MnO_2$.\par
+Et dans la dernière expérience  41 mg de DHP sont mélangés avec de l'acide trichloroacétique dans du chloroforme et 174mg de $MnO_2$.
+\medbreak
+
+Une fois ces réactions terminé, la pyridine est isolée pour chaque réaction.
+\medbreak
+Tout d'abord, une filtration par célite est réalisée pour retirer l'excès de $MnO_2$.
+ Du dichlorométhane est ajouté comme solvant car il ne réagit pas avec la pyridine, possède une faible température d’ébullition et permet de dissoudre les composés organiques mais pas les composés inorganiques.
+\medbreak
+ Deux méthodes différentes sont utilisées pour isoler le produit selon les réactifs utilisés.
+Pour les réactions en milieux neutre une distillation à l'évaporateur rotatif est réalisée pour retirer le dichlorométhane.
+Pour les deux réactions en milieux acide une extraction en ajoutant du carbonate de sodium ( une base ) est faite afin qu’elle réagisse avec l’acide et permette son passage en phase aqueuse, moins dense que la phase organique. De cette façon la phase organique contenant notre produit est récupérée,  cette opération est répétée trois fois pour plus d'efficacité. Pour retirer totalement l’eau présente dans la solution du sulfate de magnésium anhydre $MgSO_4$ est ajouté. Ce dernier en présence d'eau s'agglomère. Une simple filtration  suffit pour l'enlever de la solution. Pour enlever le dichlorométhane encore présent de la première filtration, une dernière distillation est faite.
+Enfin, une chromatographie sur colonne à la silice a été réalisée pour chacune des 4 solutions pour enlever les dernières impuretés. Pour vérifier la pureté des produit, une chromatographie sur couche mince avec un produit témoin est réalisée. (La chromatographie sur colonne avec de la silice joue sur la vitesse des produits. En effet, la silice va ralentir les espèces chimiques de façon plus ou moins significative en créant des liaison hydrogènes avec ces dernières lorsque c'est possible.)
+
+\subsubsection{Exploitation du spectre RMN}
+
+\begin{center}
+\includegraphics[scale = 0.18]{Courbes_RMN}
+\end{center}
+Ci-dessus le spectre RMN de nos expériences, ce dernier n'est pas parfait, en effet nous remarquons qu'il y a des petits pics qui composent cette  RMN qui ne devraient pas être présents avec un produit pur. Ces derniers sont en fait dus aux solvants qui n'ont pas complètement été enlevés lors de nos manipulations nous aurions dû mieux les sécher. Mais lorsque nous intégrons les pics qui nous intéressent (l'intégration est faite pour nous donner le nombre de protons pour chaque pics, ce sont les chiffres en bleus) nous  comptons 26 protons au total or nous devrions en trouver 24 pour la pyridine. Ceci peut s'expliquer à la coordonné 7,25 où nous avons 7 protons, en réalité nous ne devrions en avoir que 5, ceci est le résultat de la superposition avec le pic du $CHCl_3$ donc nous trouvons bien les 24 protons attendu lorsque nous enlevons les deux du $CHCl_3$, au contraire des 26 de la DHP.
+
+
+
+
+\subsubsection{High performance liquid chromatography ( HPLC )}
+
+
+La HPLC est une technique d’analyse qui permet de séparer et quantifier les proportions des molécules présentes dans un mélange. Le système est constitué d’une phase mobile qui est un solvant, mis sous pression à l’aide d’une pompe. Le solvant passe à très grande vitesse dans l’injecteur où est situé un échantillon du mélange. Il va alors être emporté par le solvant jusqu’à une colonne dans laquelle se trouve une phase stationnaire (immobile). Cette phase stationnaire possède des affinités différentes avec les différents composants du mélange. Ainsi, ils évoluent le long de la colonne à des vitesses différentes. A la sortie de la colonne se trouve un détecteur qui repère à quel temps et en quelle quantité chaque molécule passe, et les molécules sont ensuite récupérées dans un réservoir. Le détecteur envoie les informations à un ordinateur pour qu’il puisse générer un chromatogramme. Ce dernier a pour abscisse l’intensité du signal et pour ordonnée  le temps. Ainsi, il représente des pics dont les aires sont plus ou moins grandes en fonction de la quantité de matière pour chaque molécule présente.
+
+
+\begin{center}
+\includegraphics[scale = 0.35]{HLPC}\par
+\textit{image tirée du site de l'académie Nancy-Metz}
+\end{center}
+
+\medbreak
+
+
+\subsection{Calculs}
+
+\subsubsection*{Calcul du temps de demie-vie de la pyridine}
+
+D'après l'équation d'Eyring, on a: $$k_{enantiomerisation}=\frac{k_BT}{h}\exp{(\frac{-\Delta G^{\ddagger}}{RT})}$$
+D'après la thèse sur laquelle se base notre projet, $\Delta G^{\ddagger}$ = 115, 4 kJ.mol$^{-1}$. Comme expliqué dans la partie Aspect énergétique, c'est une constante. On peut donc calculer la valeur du temps de demie-vie à 20\degree:
+On sait que l'on a $t_\frac{1}{2} = \frac{ln(2)}{k_{racemisation}}$ et $k_{racemisation} = k_{enantiomerisation}*2$ \par
+Donc $$t_{\frac{1}{2}(T)} = [\frac{k_BT}{h}\exp{(\frac{-\Delta G^{\ddagger}}{RT})}*2]^{-1}*ln(2)$$ et $$t_{\frac{1}{2}(20\degree)} = [\frac{1.38*10^{-23}*293.15}{6.63*10^{-34}}\exp{(\frac{-115.4*10^3}{8.31*293.15}})*2]^{-1}*ln(2) = 21 252 717.2 s = 245 jours$$ 
+\newpage
+
+\subsection{Sources}
+
+\subsubsection*{Général}
+
+
+\paragraph{- \quad Synthèse organocatalysée énantiosélective de 4-arylpyridines atropoisomères par conversion de chiralité centrale à axiale : application vers la synthèse totale de la streptonigrine} - Ophélie Quinonero
+
+\paragraph{- \quad Termes de la stéréochimie : liste de termes, expressions et définitions adoptés} - CNRS, [https://www.dgdr.cnrs.fr/bo/2001/06-01/431-bo0601-termesdelastereochimie.htm]
+
+\paragraph{- \quad Chiralité et énantiomérie}, Lycée Faidherbe,  \par [https://www.faidherbe.org/site/cours/dupuis/enantio.htm]
+
+\paragraph{- \quad IUPAC Compendium of Chemical Terminology}, IUPAC (International Union of Pure and Applied Chemistry) , [https://goldbook.iupac.org/]
+
+
+\subsubsection*{Synthèse de la pyridine}
+
+\paragraph{- \quad Oxidation of dihydropyridine by DDQ in pyridine synthesis} - University of Liverpool, [http://www.chemtube3d.com/AsymAux\_DDQox.html]
+
+\paragraph{- \quad Barrier to Rotation in Thioformamide: Implications for Amide Resonance} - Keith E. Laidig, and Lynn M. Cameron
+
+\subsubsection*{HPLC et RMN}
+
+\paragraph{- \quad HLPC detectors, a brief review} - Michael Swartz, Journal of Liquid Chromatography and Related Technologies
+
+\paragraph{- \quad Dynamic HPLC on chiral stationary phases:
+A powerful tool for the investigation of
+stereomutation processes} - Ilaria D’Acquarica, Francesco Gasparrini, Marco Pierini, Claudio Villani, Giovanni Zappia
+
+\paragraph{- \quad 8-TECH-3 Measuring Rates by NMR} - University of Wisconsin, \par [https://www.chem.wisc.edu/areas/reich/nmr/08-tech-03-dnmr.htm]
+
+\newpage
+
+\vspace*{\fill}
+Ce projet étudie la conversion de chiralité, en étudiant le passage d'une molécule à chiralité centrale (Dihydropyridine) à une molécule à chiralité axiale (Pyridine). Il étudie plus précisément l'impact du traitement du réactif utilisé (ici le $MnO_2$) sur l'énantiosélectivité de cette réaction. Trois expériences sont réalisées, dont les résultats sont ensuite exploités.
+Keywords: \textbf{Conversion de chiralité, chiralité axiale, énantiosélectivité, barrière de rotation, aromaticité}
+\vspace*{\fill}
+%
+\end{document}
+
+
+
+
+
+
