@@ -58,10 +58,12 @@
         </g>
       </g>
       <g id="bVFme5cXA" transform="matrix(1, 0, 0, 1, 281.256714, -8.272257)">
-        <text style="dominant-baseline: text-before-edge; font-family: &quot;Open Sans&quot;; font-size: 27px; font-weight: 700; line-height: 18px; text-anchor: middle; white-space: pre; alignment-baseline: before-edge;"><tspan x="45.147" y="34.174" dy="0em" style="alignment-baseline: before-edge;">Deux mêmes énantiomères de la DHP, dans</tspan><tspan x="45.147" dy="1.2em" style="alignment-baseline: before-edge;">deux conformations différentes</tspan><tspan x="45.147" dy="1.2em" style="alignment-baseline: before-edge;"> (ce qui n'influe pas sur leur configuration)</tspan></text>
+        <text style="dominant-baseline: text-before-edge; font-family: &quot;Open Sans&quot;; font-size: 27px; font-weight: 700; line-height: 18px; text-anchor: middle; white-space: pre; alignment-baseline: before-edge;"><tspan x="45.147" y="34.174" dy="0em" style="alignment-baseline: before-edge;">Un énantiomère de la DHP, dans</tspan><tspan x="45.147" dy="1.2em" style="alignment-baseline: before-edge;">deux conformations différentes</tspan><tspan x="45.147" dy="1.2em" style="alignment-baseline: before-edge;"> (ce qui n'influe pas sur sa configuration)</tspan></text>
       </g>
       <g>
         <path d="M 674.64 365.96 L 769.79 339.64 L 674.64 313.32 L 674.64 330.01 L 573.74 330.01 L 573.74 349.32 L 674.64 349.32 L 674.64 365.96 Z" style="fill: rgb(118, 24, 139);"/>
+        <path d="M 674.64 365.96 L 769.79 339.64 L 674.64 313.32 L 674.64 330.01 L 573.74 330.01 L 573.74 349.32 L 674.64 349.32 L 674.64 365.96 Z" style="fill: rgb(118, 24, 139);"/>
+        <path d="M 690.544 100.144 L 739.332 76.593 L 690.544 53.042 L 690.544 67.976 L 638.809 67.976 L 638.809 85.255 L 690.544 85.255 L 690.544 100.144 Z" style="fill: rgb(118, 24, 139);"/>
       </g>
       <g id="gLAQ2TZXn" transform="matrix(1, 0, 0, 1, -213.86058, -28.474026)">
         <text transform="matrix(NaN, NaN, NaN, NaN, NaN, NaN)" style="dominant-baseline: text-before-edge; fill: rgb(118, 24, 139); font-family: &quot;Open Sans&quot;; font-size: 31px; font-weight: 600; line-height: 18px; text-anchor: middle; white-space: pre; alignment-baseline: before-edge;"><tspan x="816.52" y="506.12" dy="0em" style="alignment-baseline: before-edge;">Réaction d'élimination</tspan><tspan x="816.52 816.52" dy="1.2em 1.2em" style="alignment-baseline: before-edge;">　Arrachement des deux </tspan><tspan x="816.52" dy="1em">​</tspan><tspan style="alignment-baseline: before-edge;">atomes d'hydrogène</tspan></text>
